@@ -1,5 +1,6 @@
 var hm = new HTML2Markdown();
 var mh = new Markdown2HTML();
+
 chrome.extension.onMessage.addListener(function(req, sender, callback) {
   switch(req.command) {
     case 'html2md':
@@ -8,12 +9,14 @@ chrome.extension.onMessage.addListener(function(req, sender, callback) {
         callback(result);
       });
       break;
+
     case 'md2html':
       mh.convert(req.source, function(result) {
         console.log(hm);
         callback(result);
       });
       break;
+
     default:
       break;
   }
