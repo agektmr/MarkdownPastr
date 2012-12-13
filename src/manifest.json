@@ -1,6 +1,6 @@
 {
   "name": "Markdown Pastr",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "manifest_version": 2,
   "description": "Turns any copied rich text into markdown when pasting to textarea",
   "icons": {
@@ -31,9 +31,4 @@
       "all_frames": true
     }
   ]
-  // "browser_action": {
-  //   "default_icon": "icons/icon19.png",
-  //   "default_title": "Markdown Pastr",
-  //   "default_popup": "popup.html"
-  // }
 }

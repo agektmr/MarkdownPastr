@@ -5,10 +5,14 @@ var onpaste = function(e) {
     if (item.type === 'text/html') {
       item.getAsString(function(html) {
         chrome.extension.sendMessage({command: 'html2md', source: html}, function(markdown) {
-          var caret = e.target.selectionStart,
-              text = e.target.value;
+          if (markdown) {
+            var start = e.target.selectionStart,
+                end = e.target.selectionEnd,
+                text = e.target.value;
 
-          e.target.value = text.substr(0, caret) + markdown + text.substr(caret);
+            e.target.value = text.substr(0, start) + markdown + text.substr(end);
+            e.target.selectionStart = e.target.selectionEnd = start+markdown.length;
+          }
         });
       });
       e.preventDefault();

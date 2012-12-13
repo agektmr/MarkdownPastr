@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Markdown Converter</title>
+    <meta charset="utf-8" />
+    <script src="js/popup.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+    <style type="text/css" media="screen">
+      body {
+        padding: 20px;
+        min-width: 500px;
+        min-height: 300px;
+        max-height: 560px;
+      }
+      textarea {
+        box-sizing: border-box;
+        width: 100%;
+      }
+      #html {
+        max-height: 470px;
+        overflow-y: scroll;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>Markdown Converter</h1></header>
+    <section>
+      <textarea id="markdown" placeholder="paste HTML here to get Markdown."></textarea>
+      <div id="html"></div>
+    </section>
+    <footer>
+    </footer>
+  </body>
+</html>
