@@ -65,6 +65,7 @@
         elem.tag !== 'hr' &&
         elem.tag !== 'td' &&
         elem.tag !== 'th' &&
+        elem.tag !== 'input' &&
         content.length === 0) return '';
 
     switch(elem.tag) {
@@ -95,6 +96,16 @@
       case 'li':
       case 'blockquote':
         text += prefix+content+'\n';
+        break;
+
+      case 'input':
+        switch(elem.dom.type) {
+        case 'checkbox':
+          text += '['+(elem.dom.checked ? 'x' : ' ')+'] ';
+          break;
+        default:
+          break;
+        }
         break;
 
       case 'dl':
