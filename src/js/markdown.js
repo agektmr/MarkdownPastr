@@ -100,11 +100,11 @@
 
       case 'input':
         switch(elem.dom.type) {
-        case 'checkbox':
-          text += '['+(elem.dom.checked ? 'x' : ' ')+'] ';
-          break;
-        default:
-          break;
+          case 'checkbox':
+            text += '['+(elem.dom.checked ? 'x' : ' ')+'] ';
+            break;
+          default:
+            break;
         }
         break;
 
@@ -192,7 +192,13 @@
       var child = elem.childNodes[i];
       var tag = child.nodeName.toLowerCase();
       if (tag === 'span' && child.style['font-family'] === '\'Courier New\'') {
-        tag = 'gdoc_code';
+        // if this is single block
+        if (length === 1) {
+          tag = 'gdoc_code';
+        // if this is inline
+        } else {
+          tag = 'code';
+        }
       }
       // parse child's children
       var gchild = [];
