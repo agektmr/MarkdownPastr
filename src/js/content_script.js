@@ -4,6 +4,7 @@ var onpaste = function(e) {
 
     if (item.type === 'text/html') {
       item.getAsString(function(html) {
+        html = html.replace('<!--StartFragment-->', '').replace('<!--EndFragment-->', '');
         chrome.extension.sendMessage({command: 'html2md', source: html}, function(markdown) {
           if (markdown) {
             var start = e.target.selectionStart,
