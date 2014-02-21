@@ -575,7 +575,8 @@ describe('markdown', function() {
                   '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"> object is &quot;</span>'+
                   '<span style="font-size:15px;font-family:\'Courier New\';color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">QuotaExceededError</span>'+
                   '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">&quot; or not.</span>'+
-                '</b>';
+                '</b>'+
+                '<br/>';
       var answer = '`FileError` object is "`QuotaExceededError`" or not.  \n'+
                    'Note that FileSystem will throw a `DOMException` if you use sync version of the API ([FileSystemSync](http://www.html5rocks.com/en/tutorials/file/filesystem-sync/)).  \n'+
                    '  \n'+

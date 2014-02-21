@@ -289,6 +289,9 @@ HTML2Markdown.prototype.convert = function(html, callback) {
   if (this.result.length === 2 && this.result[1].tag === 'b') {
     this.convert2GDocMode();
     gdocs = true;
+  } else if (this.result.length === 3 && this.result[1].tag === 'b' && this.result[2].tag === 'br') {
+    this.convert2GDocMode();
+    gdocs = true;
   }
 
   callback(parseArray(this.result, gdocs));
@@ -296,7 +299,7 @@ HTML2Markdown.prototype.convert = function(html, callback) {
 
 HTML2Markdown.prototype.convert2GDocMode = function() {
   var children = this.result[1].children;
-  this.result.splice(1, 1);
+  this.result.splice(1, 2);
   for (var i = 0; i < children.length; i++) {
     this.result.push(children[i].recursivelyRemoveTopParent());
   }
