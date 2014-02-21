@@ -1,7 +1,7 @@
 var hm = new HTML2Markdown();
 var mh = new Markdown2HTML();
 
-chrome.extension.onMessage.addListener(function(req, sender, callback) {
+chrome.runtime.onMessage.addListener(function(req, sender, callback) {
   switch(req.command) {
     case 'html2md':
       hm.convert(req.source, function(result) {

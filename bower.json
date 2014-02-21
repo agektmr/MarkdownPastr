@@ -1,0 +1,27 @@
+{
+  "name": "MarkdownPastr",
+  "version": "1.1.0",
+  "authors": [
+    "Eiji Kitamura <agektmr+github@gmail.com>"
+  ],
+  "description": "Turns any copied rich text into markdown when pasting to textarea",
+  "main": "app/js/background.js",
+  "keywords": [
+    "MarkdownPastr"
+  ],
+  "license": "Apache2.0",
+  "homepage": "http://google.com/+agektmr",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.1.1"
+  },
+  "exportsOverride": {
+    "bootstrap": {
+      "css": "dist/css/*.css"
+    }
+  },
+  "devDependencies": {
+    "jasmine-underscore": "*",
+    "underscore": "~1.6.0"
+  }
+}
