@@ -36,6 +36,21 @@ module.exports = function(grunt) {
         ]
       }
     },
+    markdown: {
+      all: {
+        files: [
+          {
+            expand: true,
+            src: 'README.md',
+            dest: 'app/',
+            ext: '.html'
+          }
+        ],
+        options: {
+          template: 'template.jst'
+        }
+      }
+    },
     compress: {
       main: {
         options: {
@@ -71,6 +86,6 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('install', ['bower']);
-  grunt.registerTask('build', ['version', 'compress']);
+  grunt.registerTask('build', ['markdown', 'version', 'compress']);
 
 };
