@@ -29,13 +29,11 @@
   }
   document.addEventListener('keydown', function(e) {
     if (e.keyCode === 16) {
-      console.log('shift key down');
       shiftKey = true;
     }
   });
   document.addEventListener('keyup', function(e) {
     if (e.keyCode === 16) {
-      console.log('shift key up');
       shiftKey = false;
     }
   });

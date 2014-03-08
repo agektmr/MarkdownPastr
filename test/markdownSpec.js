@@ -443,6 +443,11 @@ describe('markdown', function() {
         expect(result).toBe('<table><tbody><tr><th>header</th></tr><tr><td>test</td></tr></tbody></table>\n');
       });
     });
+    it('can parse pre', function() {
+      h2m.convert('<pre>test\ntest\ntest</pre>', function(result) {
+        expect(result).toBe('    test\n    test\n    test');
+      });
+    });
     it('can parse code block', function() {
       var html = '<pre><code>this.addMatchers({\n'+
                  '    toDeepEqual: function(expected) {\n'+
@@ -598,6 +603,102 @@ describe('markdown', function() {
                    '\n'+
                    '## IndexedDB API\n'+
                    'When quota exceeds on [IndexedDB API](http://www.html5rocks.com/en/tutorials/indexeddb/todo/), the error calls the transaction\'s `onabort()` function with `Event` as an argument. To determine if the error is caused by a quota exceed, check if `name` property of `DOMError` object is "`QuotaExceededError`" or not.';
+      h2m.convert(html, function(result) {
+        expect(result).toBe(answer);
+      });
+    });
+    it('can parse practical gdoc 2', function() {
+      var html = '<meta charset="utf-8">'+
+                '<b style="font-weight:normal;" id="docs-internal-guid-62822cf4-924c-7687-df6a-0b48b77c9367">'+
+                  '<h1 dir="ltr" style="line-height:1.15;margin-top:10pt;margin-bottom:0pt;">'+
+                    '<span style="font-size:21px;font-family:\'Trebuchet MS\';color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">2014/03/04</span>'+
+                  '</h1>'+
+                  '<h2 dir="ltr" style="line-height:1.15;margin-top:10pt;margin-bottom:0pt;">'+
+                    '<span style="font-size:17px;font-family:\'Trebuchet MS\';color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Meetings</span>'+
+                  '</h2>'+
+                  '<ul style="margin-top:0pt;margin-bottom:0pt;">'+
+                    '<li dir="ltr" style="list-style-type:disc;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                      '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
+                        '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Chrome jp x functional</span>'+
+                      '</p>'+
+                    '</li>'+'
+                    <li dir="ltr" style="list-style-type:disc;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                      '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
+                        '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical- align:baseline;white-space:pre-wrap;">DevRel JP sync</span>'+
+                      '</p>'+
+                    '</li>'+
+                  '</ul>'+
+                  '<h2 dir="ltr" style="line-height:1.15;margin-top:10pt;margin-bottom:0pt;">'+
+                    '<span style="font-size:17px;font-family:\'Trebuchet MS\';color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Accidentals</span>'+
+                  '</h2>'+
+                  '<ul style="margin-top:0pt;margin-bottom:0pt;">'+
+                    '<li dir="ltr" style="list-style-type:disc;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                      '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">'+
+                      '</span>'+
+                    '</li>'+
+                  '</ul>'+
+                  '<h2 dir="ltr" style="line-height:1.15;margin-top:10pt;margin-bottom:0pt;">'+
+                    '<span style="font-size:17px;font-family:\'Trebuchet MS\';color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Tasks</span>'+
+                  '</h2>'+
+                  '<ul style="margin-top:0pt;margin-bottom:0pt;">'+
+                    '<li dir="ltr" style="list-style-type:disc;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                      '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
+                        '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Quota Management</span>'+
+                      '</p>'+
+                    '</li>'+
+                    '<ul style="margin-top:0pt;margin-bottom:0pt;">'+
+                      '<li dir="ltr" style="list-style-type:circle;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                        '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
+                          '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">submitted an issue to update Quota doc.</span>'+
+                        '</p>'+
+                      '</li>'+
+                      '<li dir="ltr" style="list-style-type:circle;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                        '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
+                          '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">gathered stats on Quota API usage.</span>'+
+                        '</p>'+
+                      '</li>'+
+                      '<li dir="ltr" style="list-style-type:circle;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                        '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
+                          '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">started HTML5Rocks update</span>'+
+                        '</p>'+
+                      '</li>'+
+                    '</ul>'+
+                    '<li dir="ltr" style="list-style-type:disc;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                      '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
+                        '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">OKR</span>'+
+                      '</p>'+
+                    '</li>'+
+                    '<li dir="ltr" style="list-style-type:disc;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                      '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
+                        '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Planning Scalable Outreach</span>'+
+                      '</p>'+
+                    '</li>'+
+                    '<li dir="ltr" style="list-style-type:disc;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                      '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
+                        '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Come up with upcoming projects I\'ll be working on</span>'+
+                      '</p>'+
+                    '</li>'+
+                  '</ul>'+
+                  '<h2 dir="ltr" style="line-height:1.15;margin-top:10pt;margin-bottom:0pt;">'+
+                   '<span style="font-size:17px;font-family:\'Trebuchet MS\';color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Events</span>'+
+                  '</h2>'+
+                '</b>';
+      var answer = '# 2014/03/04\n'+
+                   '## Meetings\n'+
+                   '* Chrome jp x functional\n'+
+                   '* DevRel JP sync\n'+
+                   '\n'+
+                   '## Accidentals\n'+
+                   '## Tasks\n'+
+                   '* Quota Management\n'+
+                   '    * submitted an issue to update Quota doc.\n'+
+                   '    * gathered stats on Quota API usage.\n'+
+                   '    * started HTML5Rocks update\n'+
+                   '* OKR\n'+
+                   '* Planning Scalable Outreach\n'+
+                   '* Come up with upcoming projects I\'ll be working on\n'+
+                   '\n'+
+                   '## Events';
       h2m.convert(html, function(result) {
         expect(result).toBe(answer);
       });

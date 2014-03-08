@@ -74,10 +74,10 @@ var get_prefix = function(parents, tag) {
     }
   }
 
-  if (tag === 'li' && last_list !== '') {
-    prefix.push(last_list === 'ul' ? '* ' : '1. ');
+  if (tag == 'li' && last_list !== '') {
+    prefix.push(last_list == 'ul' ? '* ' : '1. ');
   }
-  if (tag === 'code' && pre_flag) {
+  if (tag == 'code' && pre_flag) {
     prefix.push('    ');
   }
 // console.log('prefix for', parents, prefix);
@@ -262,6 +262,7 @@ var traverse = function(elem, parents) {
     var gchild = [];
     if (child.childNodes.length > 0) {
       gchild = traverse(child, parents.slice(0));
+      // If this is the single child node of `p` and is `code`
       if (tag === 'p' && child.childNodes.length === 1 && gchild[0].tag === 'code') {
         tag = 'code_line';
         gchild[0].tag = 'gdoc_code';

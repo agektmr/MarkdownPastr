@@ -1,23 +1,14 @@
 # Welcome to MarkdownPastr!
-**MarkdownPastr** turns any copied rich text into markdown when pasting to textarea.
-
+**MarkdownPastr** turns any copied rich text into markdown when pasting to textarea.
 
 ## How to use?
-Simply copy any content from websites, paste it into textarea and you will get markdown.
-On copying from Google Docs, any text with "Courier New" font will be treated as code. Any lines consisted of "Courier New" font will be treated as code block.
+- There is no dedicated Chrome Extension button. This extension is *extremely* simple as it overrides browser's copy and paste operation.
 
-If you wish to match the style, `shift` + paste gives you simple text.
+- Just copy any content from websites, paste it into `textarea` and you will get markdown.
 
-## Update history
-### Version 1.1.0
-* Better Google Doc integration.
-* `Shift` key for simple text.
+- If you wish to match the style, `shift` + paste gives you simple text.
 
-### Version 1.0.1
-* Added [`input[type=checkbox]` support](https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments).
-
-### Version 1.0.0
-* First release!
+- On copying from Google Docs, any text with "Courier New" font will be treated as code. Any lines consisted of "Courier New" font will be treated as code block.
 
 ## Info
 Chrome Web Store: [https://chrome.google.com/webstore/detail/markdown-pastr/pjeclabeidkcjhopjbgpiimlaccpdkgk](https://chrome.google.com/webstore/detail/markdown-pastr/pjeclabeidkcjhopjbgpiimlaccpdkgk)  

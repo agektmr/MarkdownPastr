@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            src: 'README.md',
+            src: 'HISTORY.md',
             dest: 'app/',
             ext: '.html'
           }
