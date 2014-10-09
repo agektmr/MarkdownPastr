@@ -1,5 +1,7 @@
 var hm = new HTML2Markdown();
 var mh = new Markdown2HTML();
+var debug = chrome.runtime.getManifest().key === undefined ? true : false;
+// var debug = false;
 
 chrome.runtime.onInstalled.addListener(function(details) {
   // Pop up history page only if the version changes in major (ex 2.0.0) or minor (ex 2.1.0).
@@ -13,6 +15,10 @@ chrome.runtime.onInstalled.addListener(function(details) {
 
 chrome.runtime.onMessage.addListener(function(req, sender, callback) {
   switch(req.command) {
+    case 'queryDebug':
+      callback(debug);
+      break;
+
     case 'html2md':
       hm.convert(req.source, function(result) {
         callback(result);

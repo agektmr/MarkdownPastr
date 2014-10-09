@@ -1,5 +1,9 @@
 (function() {
   var shiftKey = false;
+  var dubug = false;
+  chrome.runtime.sendMessage({command:'queryDebug'}, function(response) {
+    debug = response;
+  });
   var onpaste = function(e) {
     if (shiftKey) return;
     for (var i = 0; i < e.clipboardData.items.length; i++) {
@@ -7,6 +11,7 @@
 
       if (item.type === 'text/html') {
         item.getAsString(function(html) {
+          if (debug) console.log(html);
           chrome.runtime.sendMessage({command: 'html2md', source: html}, function(markdown) {
             if (markdown) {
               var start = e.target.selectionStart,
