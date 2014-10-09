@@ -22,41 +22,41 @@ describe('markdown', function() {
               tag: '#text',
               dom: text('abc'),
               children: [],
-              parents: ['div', 'div']
+              parents: ['div']
             }
           ],
-          parents: ['div']
+          parents: []
         }
       ];
-      var root = dom('div');
-      root.innerHTML = html;
+      var div = dom('div');
+      div.innerHTML = html;
+      var root = document.createDocumentFragment();
+      while (div.children.length) {
+        root.appendChild(div.children[0]);
+      }
       var result = traverse(root, []);
       expect(result).toDeepEqual(answer);
     });
 
     it('returns proper array of Elems on longer content.', function() {
       var html = '<meta charset="utf-8">'+
-                 '<h5 style="margin: 10px 0px 0px; color: rgb(0, 0, 0); font-family: Times; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">背景</h5>'+
-                 '<a href="http://www.htmq.com/css3/background-clip.shtml" style="color: rgb(128, 0, 128); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">background-clip</a>'+
-                 '<span style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(238, 238, 238); display: inline !important; float: none;">'+
-                   '<span class="Apple-converted-space"> </span>'+
-                   '…… 背景の適用範囲を指定する</span>'+
-                 '<br style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">'+
-                 '<a href="http://www.htmq.com/css3/background-origin.shtml" style="color: rgb(128, 0, 128); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">background-origin</a>'+
-                 '<span style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(238, 238, 238); display: inline !important; float: none;">'+
-                   '<span class="Apple-converted-space"> </span>…… 背景の基準位置を指定する</span>'+
-                 '<br style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">'+
-                 '<a href="http://www.htmq.com/css3/background-size.shtml" style="color: rgb(128, 0, 128); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">background-size</a>'+
-                 '<span style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(238, 238, 238); display: inline !important; float: none;">'+
-                   '<span class="Apple-converted-space"> </span>…… 背景画像のサイズを指定する</span>';
+                 '<b>'+
+                   '<h5 style="margin: 10px 0px 0px; color: rgb(0, 0, 0); font-family: Times; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">背景</h5>'+
+                   '<a href="http://www.htmq.com/css3/background-clip.shtml" style="color: rgb(128, 0, 128); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">background-clip</a>'+
+                   '<span style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(238, 238, 238); display: inline !important; float: none;">'+
+                     '<span class="Apple-converted-space"> </span>'+
+                     '…… 背景の適用範囲を指定する</span>'+
+                   '<br style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">'+
+                   '<a href="http://www.htmq.com/css3/background-origin.shtml" style="color: rgb(128, 0, 128); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">background-origin</a>'+
+                   '<span style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(238, 238, 238); display: inline !important; float: none;">'+
+                     '<span class="Apple-converted-space"> </span>…… 背景の基準位置を指定する</span>'+
+                   '<br style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">'+
+                   '<a href="http://www.htmq.com/css3/background-size.shtml" style="color: rgb(128, 0, 128); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">background-size</a>'+
+                   '<span style="color: rgb(0, 0, 0); font-family: Times; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(238, 238, 238); display: inline !important; float: none;">'+
+                   '<span class="Apple-converted-space"> </span>…… 背景画像のサイズを指定する</span>'+
+                 '</b>';
 
       var answer = [
-        {
-          tag: 'meta',
-          dom: dom('meta'),
-          children: [],
-          parents: ['div']
-        },
         {
           tag: 'h5',
           dom: dom('h5'),
@@ -65,10 +65,10 @@ describe('markdown', function() {
               tag: '#text',
               dom: text('背景'),
               children: [],
-              parents: ['div', 'h5']
+              parents: ['h5']
             }
           ],
-          parents: ['div']
+          parents: []
         },
         {
           tag: 'a',
@@ -78,10 +78,10 @@ describe('markdown', function() {
               tag: '#text',
               dom: text('background-clip'),
               children: [],
-              parents: ['div', 'a']
+              parents: ['a']
             }
           ],
-          parents: ['div']
+          parents: []
         },
         {
           tag: 'span',
@@ -95,25 +95,25 @@ describe('markdown', function() {
                   tag: '#text',
                   dom: text(' '),
                   children: [],
-                  parents: ['div', 'span', 'span']
+                  parents: ['span', 'span']
                 }
               ],
-              parents: ['div', 'span']
+              parents: ['span']
             },
             {
               tag: '#text',
               dom: text('…… 背景の適用範囲を指定する'),
               children: [],
-              parents: ['div', 'span']
+              parents: ['span']
             }
           ],
-          parents: ['div']
+          parents: []
         },
         {
           tag: 'br',
           dom: dom('br'),
           children: [],
-          parents: ['div']
+          parents: []
         },
         {
           tag: 'a',
@@ -123,10 +123,10 @@ describe('markdown', function() {
               tag: '#text',
               dom: text('background-origin'),
               children: [],
-              parents: ['div', 'a']
+              parents: ['a']
             }
           ],
-          parents: ['div']
+          parents: []
         },
         {
           tag: 'span',
@@ -140,26 +140,26 @@ describe('markdown', function() {
                   tag: '#text',
                   dom: text(' '),
                   children: [],
-                  parents: ['div', 'span', 'span']
+                  parents: ['span', 'span']
                 }
               ],
-              parents: ['div', 'span']
+              parents: ['span']
             },
             {
               tag: '#text',
               dom: text('…… 背景の基準位置を指定する'),
               children: [],
-              parents: ['div', 'span']
+              parents: ['span']
             }
           ],
-          parents: ['div']
+          parents: []
         },
         {
           tag: 'br',
           dom: dom('br'),
           children: [
           ],
-          parents: ['div']
+          parents: []
         },
         {
           tag: 'a',
@@ -169,10 +169,10 @@ describe('markdown', function() {
               tag: '#text',
               dom: text('background-size'),
               children: [],
-              parents: ['div', 'a']
+              parents: ['a']
             }
           ],
-          parents: ['div']
+          parents: []
         },
         {
           tag: 'span',
@@ -186,24 +186,31 @@ describe('markdown', function() {
                   tag: '#text',
                   dom: text(' '),
                   children: [],
-                  parents: ['div', 'span', 'span']
+                  parents: ['span', 'span']
                 }
               ],
-              parents: ['div', 'span']
+              parents: ['span']
             },
             {
               tag: '#text',
               dom: text('…… 背景画像のサイズを指定する'),
               children: [],
-              parents: ['div', 'span']
+              parents: ['span']
             }
           ],
-          parents: ['div']
+          parents: []
         }
       ];
-      var root = dom('div');
-      root.innerHTML = html;
+      var div = dom('div');
+      div.innerHTML = html;
+      var root = document.createDocumentFragment();
+      while (div.children.length) {
+        root.appendChild(div.children[0]);
+      }
       var result = traverse(root, []);
+      if (result.length >= 2 && result[0].tag == 'meta' && result[1].tag == 'b') {
+        HTML2Markdown.prototype.convert2GDocMode.apply({result:result});
+      }
       expect(result).toDeepEqual(answer);
     });
 
@@ -310,22 +317,22 @@ describe('markdown', function() {
 
     it('can parse h1', function() {
       h2m.convert('<h1>test</h1>', function(result) {
-        expect(result).toBe('\n# test\n');
+        expect(result).toBe('# test\n');
       });
     });
     it('can parse h2', function() {
       h2m.convert('<h2>test</h2>', function(result) {
-        expect(result).toBe('\n## test\n');
+        expect(result).toBe('## test\n');
       });
     });
     it('can parse h3', function() {
       h2m.convert('<h3>test</h3>', function(result) {
-        expect(result).toBe('\n### test\n');
+        expect(result).toBe('### test\n');
       });
     });
     it('can parse h4', function() {
       h2m.convert('<h4>test</h4>', function(result) {
-        expect(result).toBe('\n#### test\n');
+        expect(result).toBe('#### test\n');
       });
     });
     it('can parse a', function() {
@@ -472,18 +479,20 @@ describe('markdown', function() {
     });
     it('can parse practical example 1', function() {
       var html = '<meta charset="utf-8">'+
-                 '<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; background-color: rgb(255, 255, 255); clear: both; color: rgb(0, 0, 0); font-family: Arial, "Liberation Sans", "DejaVu Sans", sans-serif; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 17.804800033569336px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-position: initial initial; background-repeat: initial initial;">If that works, you could create a'+
-                   '<span class="Apple-converted-space"> </span>'+
-                   '<a href="https://github.com/pivotal/jasmine/wiki/Matchers" rel="nofollow" style="margin: 0px; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: rgb(74, 107, 130); text-decoration: none; cursor: pointer; background-position: initial initial; background-repeat: initial initial;">custom matcher</a>'+
+                 '<b>'+
+                   '<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; background-color: rgb(255, 255, 255); clear: both; color: rgb(0, 0, 0); font-family: Arial, "Liberation Sans", "DejaVu Sans", sans-serif; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 17.804800033569336px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-position: initial initial; background-repeat: initial initial;">If that works, you could create a'+
+                     '<span class="Apple-converted-space"> </span>'+
+                     '<a href="https://github.com/pivotal/jasmine/wiki/Matchers" rel="nofollow" style="margin: 0px; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; background-color: transparent; color: rgb(74, 107, 130); text-decoration: none; cursor: pointer; background-position: initial initial; background-repeat: initial initial;">custom matcher</a>'+
                    ':</p>'+
-                 '<pre style="margin: 0px 0px 10px; padding: 5px; border: 0px; font-size: 14px; vertical-align: baseline; background-color: rgb(238, 238, 238); font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", \'Courier New\', monospace, serif; overflow: auto; width: auto; max-height: 600px; word-wrap: normal; color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 17.804800033569336px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-position: initial initial; background-repeat: initial initial;">'+
-                   '<code style="margin: 0px; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; background-color: rgb(238, 238, 238); font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", \'Courier New\', monospace, serif; background-position: initial initial; background-repeat: initial initial;">this.addMatchers({\n'+
-                   '    toDeepEqual: function(expected) {\n'+
-                   '        return _.isEqual(this.actual, expected);\n'+
-                   '    });\n'+
-                   '});\n'+
+                   '<pre style="margin: 0px 0px 10px; padding: 5px; border: 0px; font-size: 14px; vertical-align: baseline; background-color: rgb(238, 238, 238); font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", \'Courier New\', monospace, serif; overflow: auto; width: auto; max-height: 600px; word-wrap: normal; color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 17.804800033569336px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-position: initial initial; background-repeat: initial initial;">'+
+                     '<code style="margin: 0px; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; background-color: rgb(238, 238, 238); font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", \'Courier New\', monospace, serif; background-position: initial initial; background-repeat: initial initial;">this.addMatchers({\n'+
+                     '    toDeepEqual: function(expected) {\n'+
+                     '        return _.isEqual(this.actual, expected);\n'+
+                     '    });\n'+
+                     '});\n'+
                    '</code></pre>'+
-                 '<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; background-color: rgb(255, 255, 255); clear: both; color: rgb(0, 0, 0); font-family: Arial, "Liberation Sans", "DejaVu Sans", sans-serif; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 17.804800033569336px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-position: initial initial; background-repeat: initial initial;">So you can then write specs like so:</p>';
+                   '<p style="margin: 0px 0px 1em; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; background-color: rgb(255, 255, 255); clear: both; color: rgb(0, 0, 0); font-family: Arial, "Liberation Sans", "DejaVu Sans", sans-serif; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 17.804800033569336px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-position: initial initial; background-repeat: initial initial;">So you can then write specs like so:</p>'+
+                 '</b>';
       var answer = 'If that works, you could create a [custom matcher](https://github.com/pivotal/jasmine/wiki/Matchers):\n'+
                    '\n'+
                    '    this.addMatchers({\n'+
@@ -621,8 +630,8 @@ describe('markdown', function() {
                       '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
                         '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Chrome jp x functional</span>'+
                       '</p>'+
-                    '</li>'+'
-                    <li dir="ltr" style="list-style-type:disc;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
+                    '</li>'+
+                    '<li dir="ltr" style="list-style-type:disc;font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">'+
                       '<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">'+
                         '<span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical- align:baseline;white-space:pre-wrap;">DevRel JP sync</span>'+
                       '</p>'+
