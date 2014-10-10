@@ -12,6 +12,7 @@ var Elem = (function() {
     /** @public */
     this.tag = elem.nodeName.toLowerCase();
 
+    // If <span> with "Courier New" font, this must be a code.
     if (this.tag === 'span' && elem.style.fontFamily === "'Courier New'") {
       this.tag = 'code';
     }
@@ -19,6 +20,7 @@ var Elem = (function() {
     /** @public */
     this.dom = elem;
 
+    // Append parent node's name
     if (elem.parentNode) {
       parents.push(elem.parentNode.nodeName.toLowerCase());
     }
@@ -26,18 +28,23 @@ var Elem = (function() {
     /** @public */
     this.parents = parents.slice();
 
+    // Recursively create children elements
     for (var i = 0; i < elem.childNodes.length; i++) {
       gchildren.push(new Elem(elem.childNodes[i], parents.slice()));
     }
 
+    // If this is <code>, make sure to mark child's parent as <code>
     if (this.tag === 'code' && gchildren.length === 1) {
       gchildren[0].parents.splice(-1, 1, this.tag);
     }
 
-    // If this is the single child node of `p` and is `code`
-    if (this.tag === 'p' && gchildren.length === 1 && gchildren[0].tag === 'code') {
+    // If this is <p> and its child is <code>
+    if (this.tag === 'p' && gchildren[0].tag === 'code') {
+      // Make this <code_line>
       this.tag = 'code_line';
+      // Mark parent of child as <code_line>
       gchildren[0].parents.splice(-1, 1, this.tag);
+      // Make child's <code> <code_block>
       gchildren[0].tag = 'code_block';
     }
 
@@ -54,7 +61,6 @@ var Elem = (function() {
 
   /**
    * Returns parsed Markdown
-   * @param  {Array.<Elem>} arr   An array of `Elem`s
    * @param  {boolean}      gdocs Google Docs mode flag
    * @return {string}             A string of Markdown
    */
@@ -72,7 +78,6 @@ var Elem = (function() {
    * @return {string}           Markdown string
    */
   Elem.prototype.convert = function(gdocs) {
-    if (debug) console.log('input: %o', this);
     var text = '',
         content = '',
         prefix = get_prefix(this.parents.slice(), this.tag);
@@ -176,6 +181,7 @@ var Elem = (function() {
         break;
 
       case 'i':
+      case 'em':
         text += '_'+content+'_';
         break;
 
@@ -210,7 +216,6 @@ var Elem = (function() {
     if (this.children.length === 0 && this.parents.join().indexOf('code') === -1) {
       text = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
-    if (debug) console.log('output: %s', text);
     return text;
   };
 
@@ -264,7 +269,6 @@ var Elem = (function() {
     if (tag == 'code' && pre_flag) {
       prefix.push('    ');
     }
-    if (debug) console.log('prefix for', parents, prefix);
     return prefix.join('');
   };
 
@@ -286,9 +290,11 @@ HTML2Markdown.prototype.convert = function(html, callback) {
   while (div.children.length) {
     switch (div.children[0].nodeName) {
       case 'META':
-        gdocs = true;
+      case 'COMMENT':
         div.removeChild(div.children[0]);
         break;
+      case 'B':
+        gdocs = true;
       default:
         this.root.appendChild(div.children[0]);
         break;
@@ -296,15 +302,13 @@ HTML2Markdown.prototype.convert = function(html, callback) {
   }
 
   var root = new Elem(this.root, []);
-  if (debug) console.log('After traverse: %o', root);
-  this.result = root.children[0];
 
   if (gdocs) {
-    if (debug) console.log('GDoc Mode');
+    this.result = root.children[0];
     this.convert2GDocMode();
+  } else {
+    this.result = root;
   }
-
-  if (debug) console.log('After GDocConvert: %o', this.result);
 
   callback(this.result.convertChildren(gdocs));
 };
